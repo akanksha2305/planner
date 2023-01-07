@@ -1,5 +1,5 @@
 //import 'package:event_planning_app/helper/helperFunctions.dart';
-import 'package:event_planning_app/services/databaseService.dart';
+import 'package:planner/services/databaseService.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -38,15 +38,15 @@ class AuthService {
     }
   }
 
-  //sign out
-  // Future signOut() async {
-  //   try {
-  //     await HelperFunctions.savedUserLoggedInStatus(false);
-  //     await HelperFunctions.savedUserEmailSF("");
-  //     await HelperFunctions.savedUserNameSF("");
-  //     await firebaseAuth.signOut();
-  //   } catch (e) {
-  //     return null;
-  //   }
-  // }
+  sign out
+  Future signOut() async {
+    try {
+      await HelperFunctions.savedUserLoggedInStatus(false);
+      await HelperFunctions.savedUserEmailSF("");
+      await HelperFunctions.savedUserNameSF("");
+      await firebaseAuth.signOut();
+    } catch (e) {
+      return null;
+    }
+  }
 }

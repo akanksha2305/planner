@@ -1,25 +1,25 @@
-// import 'package:event_planning_app/constants/constants.dart';
-// import 'package:event_planning_app/pages/login.dart';
+import 'package:planner/constants/constants.dart';
+import 'package:planner/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-// import 'package:event_planning_app/pages/home.dart';
-// import 'package:event_planning_app/pages/onBoard.dart';
-// import 'package:event_planning_app/helper/helperFunctions.dart';
+import 'package:planner/pages/home.dart';
+import 'package:planner/pages/onBoard.dart';
+import 'package:planner/helper/helperFunctions.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // if (kIsWeb) {
-  //   await Firebase.initializeApp(
-  //       options: FirebaseOptions(
-  //           apiKey: Constants.apiKey,
-  //           appId: Constants.appId,
-  //           messagingSenderId: Constants.messagingSenderId,
-  //           projectId: Constants.projectId));
-  // } else {
-  //   await Firebase.initializeApp();
-  // }
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+        options: FirebaseOptions(
+            apiKey: Constants.apiKey,
+            appId: Constants.appId,
+            messagingSenderId: Constants.messagingSenderId,
+            projectId: Constants.projectId));
+  } else {
+    await Firebase.initializeApp();
+  }
   runApp(const MyApp());
 }
 
@@ -39,22 +39,22 @@ class _MyAppState extends State<MyApp> {
     //getUserLoggedInStatus();
   }
 
-  // getUserLoggedInStatus() async {
-  //   await HelperFunctions.getUserLoggedInStatus().then((value) {
-  //     setState(() {
-  //       _isSignedIn = value!;
-  //     });
-  //   });
-  // }
+  getUserLoggedInStatus() async {
+    await HelperFunctions.getUserLoggedInStatus().then((value) {
+      setState(() {
+        _isSignedIn = value!;
+      });
+    });
+  }
 
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Event Planning App',
       theme: ThemeData(
-        //primaryColor: Constants.primaryColor,
+        primaryColor: Constants.primaryColor,
       ),
-      //home: _isSignedIn ? const Home() : const Login(),
+      home: _isSignedIn ? const Home() : const Login(),
     );
   }
 }
