@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:event_planning_app/widgets/widgets.dart';
-import 'package:event_planning_app/constants/constants.dart';
-import 'package:event_planning_app/services/authServices.dart';
-import 'package:event_planning_app/services/databaseService.dart';
-import 'package:event_planning_app/helper/helperFunctions.dart';
-import 'package:event_planning_app/pages/home.dart';
-import 'package:event_planning_app/pages/register.dart';
+import 'package:planner/widgets/widgets.dart';
+import 'package:planner/constants/constants.dart';
+import 'package:planner/services/authServices.dart';
+import 'package:planner/services/databaseService.dart';
+import 'package:planner/helper/helperFunctions.dart';
+import 'package:planner/pages/home.dart';
+import 'package:planner/pages/register.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 

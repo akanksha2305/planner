@@ -1,11 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../widgets/widgets.dart';
-import 'package:event_planning_app/services/authServices.dart';
-import 'package:event_planning_app/helper/helperFunctions.dart';
-import 'package:event_planning_app/constants/constants.dart';
-import 'package:event_planning_app/pages/home.dart';
-import 'package:event_planning_app/pages/login.dart';
+import 'package:planner/services/authServices.dart';
+import 'package:planner/helper/helperFunctions.dart';
+import 'package:planner/constants/constants.dart';
+import 'package:planner/pages/home.dart';
+import 'package:planner/pages/login.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
