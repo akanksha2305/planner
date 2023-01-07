@@ -3,7 +3,7 @@ import 'package:planner/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:planner/pages/home.dart';
-import 'package:planner/pages/onBoard.dart';
+// import 'package:planner/pages/onBoard.dart';
 import 'package:planner/helper/helperFunctions.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -58,3 +58,4 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+  

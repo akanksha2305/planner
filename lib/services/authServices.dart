@@ -1,4 +1,4 @@
-//import 'package:event_planning_app/helper/helperFunctions.dart';
+import 'package:planner/helper/helperFunctions.dart';
 import 'package:planner/services/databaseService.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +38,7 @@ class AuthService {
     }
   }
 
-  sign out
+  // sign out
   Future signOut() async {
     try {
       await HelperFunctions.savedUserLoggedInStatus(false);
