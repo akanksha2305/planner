@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:planner/widgets/productView.dart';
 
 Color lightgreenshede = Color(0xFFF0FAF6);
 Color lightgreenshede1 = Color(0xFFB2D9CC);
@@ -32,3 +33,50 @@ void nextScreenReplace(context, page) {
   Navigator.pushReplacement(
       context, MaterialPageRoute(builder: (context) => page));
 }
+
+final List<String> images = [
+  'assets/images/profilepic.png',
+  'assets/images/shopping.png',
+  'assets/images/shopping2.png',
+  'assets/images/profilepic.png',
+];
+
+List<Widget> Children = [
+  OfferImage(image: images[0]),
+  OfferImage(image: images[1]),
+  OfferImage(image: images[2]),
+  OfferImage(image: images[3]),
+];
+
+const List<Map<String, String>> ReccImages = [
+  {
+    'title': 'Lenovo IdeaPad',
+    'image': 'assets/images/Offers/1 (1).jpg',
+    'price': '61,490',
+    'discount': '25',
+  },
+  {
+    'title': 'Redmi 9i',
+    'image': 'assets/images/Offers/1 (2).jpg',
+    'price': '8,999',
+    'discount': '10',
+  },
+  {
+    'title': 'Boat Rockers 450',
+    'image': 'assets/images/Offers/1 (3).jpg',
+    'price': '1,299',
+    'discount': '67',
+  },
+  {
+    'title': 'Fastrack Analog Watch',
+    'image': 'assets/images/Offers/1 (4).jpg',
+    'price': '725',
+    'discount': '9',
+  },
+  {
+    'title': 'Men Regular TShirt',
+    'image': 'assets/images/Offers/1 (5).jpg',
+    'price': '369',
+    'discount': '54',
+  },
+];

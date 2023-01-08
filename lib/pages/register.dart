@@ -6,6 +6,7 @@ import 'package:planner/helper/helperFunctions.dart';
 import 'package:planner/constants/constants.dart';
 import 'package:planner/pages/home.dart';
 import 'package:planner/pages/login.dart';
+import 'package:intl/intl.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -18,10 +19,19 @@ class _RegisterState extends State<Register> {
   final formKey = GlobalKey<FormState>();
   bool _isLoading = false;
   bool _isChecked = false;
+  TextEditingController dateinput = TextEditingController();
   String email = "";
   String password = "";
   String fullName = "";
+  String dob = "";
   AuthService authService = AuthService();
+
+  @override
+  void initState() {
+    dateinput.text = DateFormat('dd-MM-yyyy').format(DateTime.now());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,8 +164,27 @@ class _RegisterState extends State<Register> {
                             },
                           ),
                           const SizedBox(
-                            height: 32,
+                            height: 15,
                           ),
+                          TextFormField(
+                              keyboardType: TextInputType.datetime,
+                              maxLength: 10,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: "Lexend",
+                              ),
+                              decoration: textInputDecoration.copyWith(
+                                  labelText: "Date of Birth",
+                                  prefixIcon: Icon(
+                                    Icons.calendar_today,
+                                    color: Colors.black,
+                                  )),
+                              onChanged: (val) {
+                                setState(() {
+                                  dob = val;
+                                });
+                              }),
+
                           Row(
                             children: [
                               Checkbox(
@@ -301,13 +330,14 @@ class _RegisterState extends State<Register> {
         _isLoading = true;
       });
       await authService
-          .registerUserWithEmailandPassword(fullName, email, password)
+          .registerUserWithEmailandPassword(fullName, email, password, dob)
           .then((value) async {
         if (value == true) {
           await HelperFunctions.savedUserLoggedInStatus(true);
           await HelperFunctions.savedUserNameSF(fullName);
           await HelperFunctions.savedUserEmailSF(email);
-          nextScreenReplace(context, Home());
+          await HelperFunctions.savedUserDOB(dob);
+          nextScreen(context, Home());
         } else {
           setState(() {
             showSnackBar(context, Colors.red, value);
