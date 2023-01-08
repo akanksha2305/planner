@@ -1,9 +1,9 @@
 import 'package:planner/constants/constants.dart';
 import 'package:planner/helper/helperFunctions.dart';
 import 'package:planner/pages/login.dart';
-// import 'package:planner/pages/profile.dart';
-import 'package:planner/pages/register.dart';
-// import 'package:planner/pages/settings.dart';
+import 'package:planner/pages/profile.dart';
+import 'package:planner/widgets/productList.dart';
+import 'package:planner/widgets/widgets.dart';
 import 'package:planner/services/databaseService.dart';
 import 'package:flutter/material.dart';
 import 'package:planner/services/authServices.dart';
@@ -21,6 +21,7 @@ class _HomeState extends State<Home> {
 
   String userName = "";
   String email = "";
+  String dob = "";
   AuthService authService = AuthService();
 
   @override
@@ -71,6 +72,18 @@ class _HomeState extends State<Home> {
               padding: EdgeInsets.only(right: 0.0),
               child: IconButton(
                 icon: Icon(
+                  Icons.add,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  addEvent();
+                },
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(right: 0.0),
+              child: IconButton(
+                icon: Icon(
                   Icons.logout,
                   color: Colors.red,
                 ),
@@ -81,93 +94,158 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
-        body: Column(
-          children: [
-            Center(
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.95,
-                height: MediaQuery.of(context).size.height * 0.07,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(
-                    color: Colors.black.withOpacity(0.2),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Center(
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  height: MediaQuery.of(context).size.height * 0.07,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(
+                      color: Colors.black.withOpacity(0.2),
+                    ),
                   ),
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                child: Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        //SearchMethod();
-                      },
-                      child: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(40),
-                        ),
-                        child: Icon(
-                          Icons.search,
-                          color: Colors.black,
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          //SearchMethod();
+                        },
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          child: Icon(
+                            Icons.add_link_outlined,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                      // decoration: BoxDecoration(
-                      //   borderRadius: BorderRadius.circular(20),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        // decoration: BoxDecoration(
+                        //   borderRadius: BorderRadius.circular(20),
 
-                      // ),
-                      child: Expanded(
-                        child: TextField(
-                          //controller: searchController,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: "Lexend",
-                            fontWeight: FontWeight.w300,
-                            fontSize: 17,
-                          ),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Search Groups...",
-                            hintStyle: TextStyle(
+                        // ),
+                        child: Expanded(
+                          child: TextField(
+                            //controller: searchController,
+                            style: TextStyle(
                               color: Colors.black,
                               fontFamily: "Lexend",
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.w300,
+                              fontSize: 17,
+                            ),
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: "Product Link",
+                              hintStyle: TextStyle(
+                                color: Colors.black.withOpacity(0.5),
+                                fontFamily: "Lexend",
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Color.fromRGBO(161, 117, 97, 2).withOpacity(0.8),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: IconButton(
-                        onPressed: () {
-                          _eventURL();
-                        },
-                        icon: Icon(Icons.add),
-                      ),
-                    )
+                      Container(
+                        decoration: BoxDecoration(
+                          color:
+                              Color.fromRGBO(161, 117, 97, 2).withOpacity(0.8),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: IconButton(
+                          onPressed: () {
+                            _eventURL();
+                          },
+                          icon: Icon(Icons.add),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 12.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Suggestions",
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                          fontFamily: "Lexend",
+                        )),
                   ],
                 ),
               ),
-            ),
-
-            // isLoading
-            //     ? Center(
-            //         child: CircularProgressIndicator(
-            //           color: Theme.of(context).primaryColor,
-            //         ),
-            //       )
-            //     : groupList(),
-          ],
+              SizedBox(
+                height: 18,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 12.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Based on your search history",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black.withOpacity(0.7),
+                          fontFamily: "Lexend",
+                        )),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 18,
+              ),
+              //add image slider here
+              Offerlist(
+                length: 5,
+                Children: Children,
+              ),
+              SizedBox(
+                height: 18,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 12.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Party Products",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black.withOpacity(0.7),
+                          fontFamily: "Lexend",
+                        )),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 18,
+              ),
+              //add image slider here
+              Offerlist(
+                length: 5,
+                Children: Children,
+              ),
+            ],
+          ),
         ),
         bottomNavigationBar: Padding(
           padding: EdgeInsets.all(15),
@@ -210,10 +288,14 @@ class _HomeState extends State<Home> {
                   ),
                   IconButton(
                     onPressed: () {
-                      // nextScreen(
-                      //   context,
-                      //   Profile(userName: userName, email: email),
-                      // );
+                      nextScreen(
+                        context,
+                        Profile(
+                          userName: userName,
+                          email: email,
+                          dob: dob,
+                        ),
+                      );
                     },
                     icon: Icon(
                       Icons.person,
@@ -319,7 +401,7 @@ class _HomeState extends State<Home> {
                         Navigator.of(context).pop();
                       },
                       child: Container(
-                        width: MediaQuery.of(context).size.width*0.35,
+                        width: MediaQuery.of(context).size.width * 0.35,
                         decoration: BoxDecoration(
                           color: Colors.white,
                         ),
@@ -344,7 +426,7 @@ class _HomeState extends State<Home> {
                         Navigator.of(context).pop();
                       },
                       child: Container(
-                        width: MediaQuery.of(context).size.width*0.35,
+                        width: MediaQuery.of(context).size.width * 0.35,
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
                         ),
@@ -459,5 +541,69 @@ class _HomeState extends State<Home> {
         ],
       ),
     );
+  }
+
+  addEvent() {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              "New Event!",
+              style: TextStyle(
+                fontFamily: "Lexend",
+                fontSize: 25,
+              ),
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextFormField(
+                  //controller: _eventNameController,
+                  decoration: textInputDecoration.copyWith(
+                    hintText: "Event Name",
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  decoration: textInputDecoration.copyWith(
+                    hintText: "Event Description",
+                  ),
+                ),
+              ],
+            ),
+            actions: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Text(
+                      "Cancel",
+                      style: TextStyle(
+                        fontFamily: "Lexend",
+                        fontSize: 18,
+                        color: Colors.red,
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    child: Text(
+                      "Add",
+                      style: TextStyle(
+                        fontFamily: "Lexend",
+                        fontSize: 18,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          );
+        });
   }
 }
